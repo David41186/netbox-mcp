@@ -15,6 +15,8 @@ Rather than one tool per NetBox object type (there are 100+), this server expose
 - `netbox_create_object(endpoint, data)` — create a new object.
 - `netbox_update_object(endpoint, id, data)` — partially update an object.
 - `netbox_delete_object(endpoint, id, confirm=True)` — delete an object (requires explicit confirmation).
+- `netbox_list_actions` — list every supported server-side "action" (beyond plain CRUD), e.g. allocating the next available IP/prefix/VLAN/ASN, tracing a cable path, rendering a device's config, a rack's elevation, or triggering a data source sync.
+- `netbox_call_action(endpoint, id, action, method="list", params=None, data=None)` — call one of those actions on a specific object.
 
 ## Setup
 

@@ -7,8 +7,16 @@ from typing import Any
 import pynetbox
 from mcp.server import MCPServer
 
+from .actions import describe_actions
 from .catalog import describe_catalog
-from .client import NetBoxToolError, as_dict, get_client, resolve_endpoint
+from .client import (
+    NetBoxToolError,
+    as_action_result,
+    as_dict,
+    get_client,
+    resolve_action,
+    resolve_endpoint,
+)
 from .config import get_settings
 
 
@@ -28,6 +36,18 @@ def register_tools(mcp: MCPServer) -> None:
         first to discover which endpoint strings are valid for the other tools.
         """
         return describe_catalog()
+
+    @mcp.tool()
+    def netbox_list_actions() -> dict[str, dict[str, str]]:
+        """List every supported "app.endpoint" + action pair for
+        netbox_call_action, grouped by endpoint, with a description of what
+        each action does and whether it supports writes. These are NetBox's
+        server-side operations beyond plain CRUD — e.g. allocating the next
+        available IP/prefix/VLAN/ASN, tracing a cable path from an
+        interface or power port, rendering a device's or VM's config,
+        fetching a rack's elevation, or triggering a data source sync.
+        """
+        return describe_actions()
 
     @mcp.tool()
     def netbox_get_schema(endpoint: str) -> dict[str, Any]:
@@ -164,3 +184,51 @@ def register_tools(mcp: MCPServer) -> None:
         except pynetbox.RequestError as exc:
             raise NetBoxToolError(str(exc)) from exc
         return f"Deleted '{endpoint}' object with id {id}."
+
+    @mcp.tool()
+    def netbox_call_action(
+        endpoint: str,
+        id: int,
+        action: str,
+        method: str = "list",
+        params: dict[str, Any] | None = None,
+        data: dict[str, Any] | list[dict[str, Any]] | None = None,
+    ) -> Any:
+        """Call a NetBox "detail" action on a specific object — a
+        server-side operation beyond plain CRUD, e.g. allocating the next
+        available IP in a prefix, tracing a cable path from an interface,
+        or rendering a device's config. Call netbox_list_actions first to
+        see which "app.endpoint" + action pairs are supported, what each
+        expects, and whether it's a GET-style ("list") or POST-style
+        ("create") action — calling the wrong one surfaces NetBox's own
+        404/405 as an error.
+
+        Args:
+            endpoint: An "app.endpoint" string identifying the object's
+                collection, e.g. "ipam.prefixes".
+            id: The numeric ID of the specific object to act on.
+            action: The action name, e.g. "available_ips".
+            method: "list" for a read (GET) — e.g. list available IPs,
+                trace a cable path, fetch a rack's elevation — or "create"
+                for a write (POST) — e.g. allocate a new IP/prefix/VLAN/ASN,
+                render a config, trigger a data source sync. Disabled when
+                the server is running in read-only mode.
+            params: Optional query parameters for "list" calls, e.g.
+                {"render": "svg"} for a rack elevation diagram.
+            data: Optional payload for "create" calls. A single dict
+                creates one object; a list of dicts creates several in one
+                call. Omit for actions that take no input.
+        """
+        if method not in ("list", "create"):
+            raise NetBoxToolError("method must be 'list' or 'create'.")
+        if method == "create":
+            _require_write_access()
+        detail = resolve_action(endpoint, id, action)
+        try:
+            if method == "list":
+                result = detail.list(**(params or {}))
+            else:
+                result = detail.create(data=data)
+        except pynetbox.RequestError as exc:
+            raise NetBoxToolError(str(exc)) from exc
+        return as_action_result(result)
