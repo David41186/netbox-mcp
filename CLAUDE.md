@@ -23,7 +23,7 @@ Config comes from environment variables, loaded via `.env` (copy from `.env.exam
 
 ## Architecture
 
-NetBox has 100+ object types across its apps (dcim, ipam, circuits, virtualization, tenancy, extras, users, vpn, wireless). Instead of one MCP tool per object type, this server exposes **7 generic CRUD tools** (`src/netbox_mcp/tools.py`) parameterized by an `"app.endpoint"` string, e.g. `"dcim.devices"` or `"ipam.prefixes"`:
+NetBox has 100+ object types across its apps (dcim, ipam, circuits, virtualization, tenancy, extras, users, vpn, wireless, core). Instead of one MCP tool per object type, this server exposes **7 generic CRUD tools** (`src/netbox_mcp/tools.py`) parameterized by an `"app.endpoint"` string, e.g. `"dcim.devices"` or `"ipam.prefixes"`:
 
 - `netbox_list_endpoints` / `netbox_get_schema` — discovery, so the LLM can find valid endpoint strings and field definitions without guessing.
 - `netbox_list_objects` / `netbox_get_object` — reads.
@@ -38,7 +38,7 @@ The request flow through the codebase:
 
 **`NetBoxToolError` (`client.py`) subclasses `mcp.server.mcpserver.exceptions.ToolError`, not the bare `Exception` class.** This matters: the `mcp` SDK only forwards the exception's message verbatim to the LLM for `ToolError` subclasses. Any other exception type is treated as a crash — the client only sees a generic "Error executing tool X" and the real message is dropped to stderr. Any new error path added to a tool must raise `NetBoxToolError` (or another `ToolError` subclass) to stay LLM-visible.
 
-`catalog.py` is a curated whitelist, not the full NetBox schema — it exists both to power the `netbox_list_endpoints` discovery tool and to reject unknown endpoint strings before they reach the network (rather than surfacing a raw `AttributeError` from `pynetbox`'s dynamic attribute access). When adding support for a new NetBox object type, add it here first.
+`catalog.py` mirrors NetBox's full REST API surface (all endpoints under `dcim`, `ipam`, `circuits`, `virtualization`, `tenancy`, `extras`, `users`, `vpn`, `wireless`, and `core`) as of when it was last checked against a live instance. It exists both to power the `netbox_list_endpoints` discovery tool and to reject unknown endpoint strings before they reach the network (rather than surfacing a raw `AttributeError` from `pynetbox`'s dynamic attribute access). NetBox occasionally adds endpoints between releases — if one's missing, check the live instance's `/api/<app>/` root (or `nb.http_session.get(f"{settings.netbox_url}/api/<app>/")`) and add it to the relevant app dict in `catalog.py`; `client.py`'s resolution is fully generic, so no other code needs to change.
 
 `netbox_get_schema` bypasses `pynetbox`'s own model layer and calls `nb.http_session.options(endpoint.url)` directly — `pynetbox` has no first-class API for the `OPTIONS` schema/choices endpoint.
 
