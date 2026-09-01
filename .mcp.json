@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "netbox": {
+      "command": "uv",
+      "args": ["--directory", "/home/dave/code/netbox-mcp", "run", "netbox-mcp"]
+    }
+  }
+}

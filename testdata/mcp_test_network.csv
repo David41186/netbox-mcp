@@ -1,0 +1,101 @@
+resource_type,name,site,rack,role,manufacturer,model,rack_units,position,status,serial,mgmt_ip,description
+rack,mcp-test-rack-dc1-01,mcp-test-dc1,,,APC,NetShelter SX 42U,42,,active,,,DC1 row A rack 1
+rack,mcp-test-rack-dc1-02,mcp-test-dc1,,,APC,NetShelter SX 42U,42,,active,,,DC1 row A rack 2
+rack,mcp-test-rack-dc1-03,mcp-test-dc1,,,APC,NetShelter SX 42U,42,,active,,,DC1 row A rack 3
+rack,mcp-test-rack-dc1-04,mcp-test-dc1,,,APC,NetShelter SX 42U,42,,active,,,DC1 row A rack 4
+rack,mcp-test-rack-dc1-05,mcp-test-dc1,,,APC,NetShelter SX 42U,42,,active,,,DC1 row A rack 5
+rack,mcp-test-rack-dc2-01,mcp-test-dc2,,,APC,NetShelter SX 42U,42,,active,,,DC2 row A rack 1
+rack,mcp-test-rack-dc2-02,mcp-test-dc2,,,APC,NetShelter SX 42U,42,,active,,,DC2 row A rack 2
+rack,mcp-test-rack-dc2-03,mcp-test-dc2,,,APC,NetShelter SX 42U,42,,active,,,DC2 row A rack 3
+device,mcp-test-rtr-001,mcp-test-dc1,mcp-test-rack-dc1-01,router,Cisco,ASR1001-X,1,1,active,SN-1JED1UWB,10.10.0.10,Router in mcp-test-rack-dc1-01
+device,mcp-test-rtr-002,mcp-test-dc1,mcp-test-rack-dc1-02,router,Cisco,ASR1001-X,1,1,active,SN-HWV0ZQRK,10.10.0.11,Router in mcp-test-rack-dc1-02
+device,mcp-test-rtr-003,mcp-test-dc1,mcp-test-rack-dc1-03,router,Cisco,ASR1001-X,1,1,active,SN-ZMF8MDD4,10.10.0.12,Router in mcp-test-rack-dc1-03
+device,mcp-test-rtr-004,mcp-test-dc1,mcp-test-rack-dc1-04,router,Cisco,ASR1001-X,2,1,active,SN-0U9NU4X5,10.10.0.13,Router in mcp-test-rack-dc1-04
+device,mcp-test-rtr-005,mcp-test-dc2,mcp-test-rack-dc2-01,router,Cisco,ASR1001-X,1,1,active,SN-BHKCHDKX,10.20.0.10,Router in mcp-test-rack-dc2-01
+device,mcp-test-rtr-006,mcp-test-dc2,mcp-test-rack-dc2-02,router,Cisco,ASR1001-X,2,1,active,SN-NHK7YWF0,10.20.0.11,Router in mcp-test-rack-dc2-02
+device,mcp-test-sw-001,mcp-test-dc1,mcp-test-rack-dc1-01,switch,Arista,7050SX3-48YC8,1,2,active,SN-N9XUZ42H,10.10.0.14,Switch in mcp-test-rack-dc1-01
+device,mcp-test-sw-002,mcp-test-dc1,mcp-test-rack-dc1-02,switch,Arista,7050SX3-48YC8,1,2,active,SN-PC7V0HS6,10.10.0.15,Switch in mcp-test-rack-dc1-02
+device,mcp-test-sw-003,mcp-test-dc1,mcp-test-rack-dc1-03,switch,Cisco,Catalyst 9300-48P,1,2,active,SN-KJVJV6PH,10.10.0.16,Switch in mcp-test-rack-dc1-03
+device,mcp-test-sw-004,mcp-test-dc1,mcp-test-rack-dc1-04,switch,Cisco,Catalyst 9200-24P,1,3,active,SN-S15FFZWP,10.10.0.17,Switch in mcp-test-rack-dc1-04
+device,mcp-test-sw-005,mcp-test-dc1,mcp-test-rack-dc1-05,switch,Cisco,Catalyst 9200-24P,1,1,active,SN-JU8ZD612,10.10.0.18,Switch in mcp-test-rack-dc1-05
+device,mcp-test-sw-006,mcp-test-dc1,mcp-test-rack-dc1-01,switch,Cisco,Catalyst 9300-48P,1,3,active,SN-KFA0091T,10.10.0.19,Switch in mcp-test-rack-dc1-01
+device,mcp-test-sw-007,mcp-test-dc1,mcp-test-rack-dc1-02,switch,Cisco,Catalyst 9200-24P,1,3,active,SN-LXWF1U2U,10.10.0.20,Switch in mcp-test-rack-dc1-02
+device,mcp-test-sw-008,mcp-test-dc1,mcp-test-rack-dc1-03,switch,Cisco,Catalyst 9200-24P,1,3,active,SN-MA754LB5,10.10.0.21,Switch in mcp-test-rack-dc1-03
+device,mcp-test-sw-009,mcp-test-dc1,mcp-test-rack-dc1-04,switch,Cisco,Catalyst 9300-48P,1,4,active,SN-039UEY8F,10.10.0.22,Switch in mcp-test-rack-dc1-04
+device,mcp-test-sw-010,mcp-test-dc1,mcp-test-rack-dc1-05,switch,Cisco,Catalyst 9300-48P,1,2,active,SN-71Z0PYN6,10.10.0.23,Switch in mcp-test-rack-dc1-05
+device,mcp-test-sw-011,mcp-test-dc1,mcp-test-rack-dc1-01,switch,Cisco,Catalyst 9300-48P,1,4,active,SN-JCAUWA0C,10.10.0.24,Switch in mcp-test-rack-dc1-01
+device,mcp-test-sw-012,mcp-test-dc1,mcp-test-rack-dc1-02,switch,Cisco,Catalyst 9300-48P,1,4,active,SN-5CJYHE7V,10.10.0.25,Switch in mcp-test-rack-dc1-02
+device,mcp-test-sw-013,mcp-test-dc1,mcp-test-rack-dc1-03,switch,Cisco,Catalyst 9300-48P,1,4,active,SN-23GDQQR0,10.10.0.26,Switch in mcp-test-rack-dc1-03
+device,mcp-test-sw-014,mcp-test-dc1,mcp-test-rack-dc1-04,switch,Cisco,Catalyst 9300-48P,1,5,active,SN-PM5JGRQK,10.10.0.27,Switch in mcp-test-rack-dc1-04
+device,mcp-test-sw-015,mcp-test-dc1,mcp-test-rack-dc1-05,switch,Cisco,Catalyst 9300-48P,1,3,active,SN-R5UB9487,10.10.0.28,Switch in mcp-test-rack-dc1-05
+device,mcp-test-sw-016,mcp-test-dc1,mcp-test-rack-dc1-01,switch,Cisco,Catalyst 9300-48P,1,5,active,SN-PS56FAP7,10.10.0.29,Switch in mcp-test-rack-dc1-01
+device,mcp-test-sw-017,mcp-test-dc2,mcp-test-rack-dc2-01,switch,Arista,7050SX3-48YC8,1,2,active,SN-Q89U0FL8,10.20.0.12,Switch in mcp-test-rack-dc2-01
+device,mcp-test-sw-018,mcp-test-dc2,mcp-test-rack-dc2-02,switch,Cisco,Catalyst 9200-24P,1,3,active,SN-LBS7UBT4,10.20.0.13,Switch in mcp-test-rack-dc2-02
+device,mcp-test-sw-019,mcp-test-dc2,mcp-test-rack-dc2-03,switch,Cisco,Catalyst 9200-24P,1,1,active,SN-C5P8VVBC,10.20.0.14,Switch in mcp-test-rack-dc2-03
+device,mcp-test-sw-020,mcp-test-dc2,mcp-test-rack-dc2-01,switch,Arista,7050SX3-48YC8,1,3,active,SN-G0JPYLL1,10.20.0.15,Switch in mcp-test-rack-dc2-01
+device,mcp-test-sw-021,mcp-test-dc2,mcp-test-rack-dc2-02,switch,Cisco,Catalyst 9300-48P,1,4,active,SN-R99CHK75,10.20.0.16,Switch in mcp-test-rack-dc2-02
+device,mcp-test-sw-022,mcp-test-dc2,mcp-test-rack-dc2-03,switch,Arista,7050SX3-48YC8,1,2,active,SN-KQUL93TY,10.20.0.17,Switch in mcp-test-rack-dc2-03
+device,mcp-test-sw-023,mcp-test-dc2,mcp-test-rack-dc2-01,switch,Cisco,Catalyst 9200-24P,1,4,active,SN-D5J61FKH,10.20.0.18,Switch in mcp-test-rack-dc2-01
+device,mcp-test-sw-024,mcp-test-dc2,mcp-test-rack-dc2-02,switch,Cisco,Catalyst 9300-48P,1,5,active,SN-Z4TJ6BX4,10.20.0.19,Switch in mcp-test-rack-dc2-02
+device,mcp-test-fw-001,mcp-test-dc1,mcp-test-rack-dc1-01,firewall,Palo Alto Networks,PA-3220,1,6,active,SN-ME9FRZVD,10.10.0.30,Firewall in mcp-test-rack-dc1-01
+device,mcp-test-fw-002,mcp-test-dc1,mcp-test-rack-dc1-02,firewall,Palo Alto Networks,PA-3220,1,5,active,SN-4VFEL635,10.10.0.31,Firewall in mcp-test-rack-dc1-02
+device,mcp-test-fw-003,mcp-test-dc1,mcp-test-rack-dc1-03,firewall,Palo Alto Networks,PA-3220,2,5,active,SN-ZYNV5917,10.10.0.32,Firewall in mcp-test-rack-dc1-03
+device,mcp-test-fw-004,mcp-test-dc2,mcp-test-rack-dc2-01,firewall,Palo Alto Networks,PA-3220,1,5,active,SN-935A1M73,10.20.0.20,Firewall in mcp-test-rack-dc2-01
+device,mcp-test-lb-001,mcp-test-dc1,mcp-test-rack-dc1-01,load-balancer,F5,BIG-IP i4800,2,7,active,SN-FZPBSG7M,10.10.0.33,Load Balancer in mcp-test-rack-dc1-01
+device,mcp-test-lb-002,mcp-test-dc1,mcp-test-rack-dc1-02,load-balancer,F5,BIG-IP i4800,2,6,active,SN-AGM58KXP,10.10.0.34,Load Balancer in mcp-test-rack-dc1-02
+device,mcp-test-lb-003,mcp-test-dc1,mcp-test-rack-dc1-03,load-balancer,F5,BIG-IP i4800,2,7,active,SN-D8G8KDQ0,10.10.0.35,Load Balancer in mcp-test-rack-dc1-03
+device,mcp-test-lb-004,mcp-test-dc2,mcp-test-rack-dc2-01,load-balancer,F5,BIG-IP i4800,2,6,active,SN-WTPVJ0A7,10.20.0.21,Load Balancer in mcp-test-rack-dc2-01
+device,mcp-test-srv-001,mcp-test-dc1,mcp-test-rack-dc1-01,server,Dell,PowerEdge R750,1,9,active,SN-Q87XYE6T,10.10.0.36,Server in mcp-test-rack-dc1-01
+device,mcp-test-srv-002,mcp-test-dc1,mcp-test-rack-dc1-02,server,Dell,PowerEdge R750,2,8,active,SN-PLEQ7Z6W,10.10.0.37,Server in mcp-test-rack-dc1-02
+device,mcp-test-srv-003,mcp-test-dc1,mcp-test-rack-dc1-03,server,Dell,PowerEdge R750,2,9,active,SN-UAKQVYRR,10.10.0.38,Server in mcp-test-rack-dc1-03
+device,mcp-test-srv-004,mcp-test-dc1,mcp-test-rack-dc1-04,server,HPE,ProLiant DL380 Gen10,1,6,active,SN-S63FCTXM,10.10.0.39,Server in mcp-test-rack-dc1-04
+device,mcp-test-srv-005,mcp-test-dc1,mcp-test-rack-dc1-05,server,HPE,ProLiant DL380 Gen10,1,4,active,SN-L3FB9W2R,10.10.0.40,Server in mcp-test-rack-dc1-05
+device,mcp-test-srv-006,mcp-test-dc1,mcp-test-rack-dc1-01,server,HPE,ProLiant DL380 Gen10,1,10,active,SN-ZSJYA12D,10.10.0.41,Server in mcp-test-rack-dc1-01
+device,mcp-test-srv-007,mcp-test-dc1,mcp-test-rack-dc1-02,server,Dell,PowerEdge R650,2,10,active,SN-F8TBJ4R3,10.10.0.42,Server in mcp-test-rack-dc1-02
+device,mcp-test-srv-008,mcp-test-dc1,mcp-test-rack-dc1-03,server,Dell,PowerEdge R750,2,11,active,SN-W0T4U61S,10.10.0.43,Server in mcp-test-rack-dc1-03
+device,mcp-test-srv-009,mcp-test-dc1,mcp-test-rack-dc1-04,server,Dell,PowerEdge R650,2,7,active,SN-4K2SJQ0H,10.10.0.44,Server in mcp-test-rack-dc1-04
+device,mcp-test-srv-010,mcp-test-dc1,mcp-test-rack-dc1-05,server,Dell,PowerEdge R750,2,5,active,SN-6CFPFHQM,10.10.0.45,Server in mcp-test-rack-dc1-05
+device,mcp-test-srv-011,mcp-test-dc1,mcp-test-rack-dc1-01,server,Dell,PowerEdge R750,2,11,active,SN-C4P28A5V,10.10.0.46,Server in mcp-test-rack-dc1-01
+device,mcp-test-srv-012,mcp-test-dc1,mcp-test-rack-dc1-02,server,Dell,PowerEdge R650,2,12,active,SN-8LP64U03,10.10.0.47,Server in mcp-test-rack-dc1-02
+device,mcp-test-srv-013,mcp-test-dc1,mcp-test-rack-dc1-03,server,Dell,PowerEdge R750,1,13,active,SN-HQAMZPFR,10.10.0.48,Server in mcp-test-rack-dc1-03
+device,mcp-test-srv-014,mcp-test-dc1,mcp-test-rack-dc1-04,server,HPE,ProLiant DL380 Gen10,1,9,active,SN-U6WYCQ5G,10.10.0.49,Server in mcp-test-rack-dc1-04
+device,mcp-test-srv-015,mcp-test-dc1,mcp-test-rack-dc1-05,server,Dell,PowerEdge R750,2,7,active,SN-MRM5K8Q4,10.10.0.50,Server in mcp-test-rack-dc1-05
+device,mcp-test-srv-016,mcp-test-dc1,mcp-test-rack-dc1-01,server,Dell,PowerEdge R650,2,13,active,SN-1B8HC8BB,10.10.0.51,Server in mcp-test-rack-dc1-01
+device,mcp-test-srv-017,mcp-test-dc1,mcp-test-rack-dc1-02,server,Dell,PowerEdge R650,1,14,active,SN-4XJSD8RJ,10.10.0.52,Server in mcp-test-rack-dc1-02
+device,mcp-test-srv-018,mcp-test-dc1,mcp-test-rack-dc1-03,server,Dell,PowerEdge R650,2,14,active,SN-W802FLV7,10.10.0.53,Server in mcp-test-rack-dc1-03
+device,mcp-test-srv-019,mcp-test-dc1,mcp-test-rack-dc1-04,server,Dell,PowerEdge R750,2,10,active,SN-8GW4JZLZ,10.10.0.54,Server in mcp-test-rack-dc1-04
+device,mcp-test-srv-020,mcp-test-dc1,mcp-test-rack-dc1-05,server,HPE,ProLiant DL380 Gen10,1,9,active,SN-2MQNTM43,10.10.0.55,Server in mcp-test-rack-dc1-05
+device,mcp-test-srv-021,mcp-test-dc1,mcp-test-rack-dc1-01,server,Dell,PowerEdge R750,1,15,active,SN-8X40Q08K,10.10.0.56,Server in mcp-test-rack-dc1-01
+device,mcp-test-srv-022,mcp-test-dc1,mcp-test-rack-dc1-02,server,Dell,PowerEdge R750,2,15,active,SN-Q0K44C5J,10.10.0.57,Server in mcp-test-rack-dc1-02
+device,mcp-test-srv-023,mcp-test-dc1,mcp-test-rack-dc1-03,server,HPE,ProLiant DL380 Gen10,2,16,active,SN-WNA4GH3M,10.10.0.58,Server in mcp-test-rack-dc1-03
+device,mcp-test-srv-024,mcp-test-dc1,mcp-test-rack-dc1-04,server,HPE,ProLiant DL380 Gen10,2,12,active,SN-A8C0S1ZX,10.10.0.59,Server in mcp-test-rack-dc1-04
+device,mcp-test-srv-025,mcp-test-dc1,mcp-test-rack-dc1-05,server,Dell,PowerEdge R750,2,10,active,SN-2DHZLVSU,10.10.0.60,Server in mcp-test-rack-dc1-05
+device,mcp-test-srv-026,mcp-test-dc1,mcp-test-rack-dc1-01,server,HPE,ProLiant DL380 Gen10,2,16,active,SN-UMRLH0L1,10.10.0.61,Server in mcp-test-rack-dc1-01
+device,mcp-test-srv-027,mcp-test-dc1,mcp-test-rack-dc1-02,server,Dell,PowerEdge R650,1,17,active,SN-HS09TKDG,10.10.0.62,Server in mcp-test-rack-dc1-02
+device,mcp-test-srv-028,mcp-test-dc1,mcp-test-rack-dc1-03,server,Dell,PowerEdge R750,1,18,active,SN-GAUK9UZE,10.10.0.63,Server in mcp-test-rack-dc1-03
+device,mcp-test-srv-029,mcp-test-dc1,mcp-test-rack-dc1-04,server,Dell,PowerEdge R650,2,14,active,SN-5VRQGB7S,10.10.0.64,Server in mcp-test-rack-dc1-04
+device,mcp-test-srv-030,mcp-test-dc1,mcp-test-rack-dc1-05,server,Dell,PowerEdge R750,1,12,active,SN-SVZF38CJ,10.10.0.65,Server in mcp-test-rack-dc1-05
+device,mcp-test-srv-031,mcp-test-dc1,mcp-test-rack-dc1-01,server,HPE,ProLiant DL380 Gen10,2,18,active,SN-WX2N6LWQ,10.10.0.66,Server in mcp-test-rack-dc1-01
+device,mcp-test-srv-032,mcp-test-dc1,mcp-test-rack-dc1-02,server,HPE,ProLiant DL380 Gen10,1,18,active,SN-8D1XJCJU,10.10.0.67,Server in mcp-test-rack-dc1-02
+device,mcp-test-srv-033,mcp-test-dc1,mcp-test-rack-dc1-03,server,Dell,PowerEdge R650,1,19,active,SN-PZRBKK5C,10.10.0.68,Server in mcp-test-rack-dc1-03
+device,mcp-test-srv-034,mcp-test-dc1,mcp-test-rack-dc1-04,server,Dell,PowerEdge R750,1,16,active,SN-2XY7QUY6,10.10.0.69,Server in mcp-test-rack-dc1-04
+device,mcp-test-srv-035,mcp-test-dc1,mcp-test-rack-dc1-05,server,Dell,PowerEdge R650,1,13,active,SN-C2W47QRL,10.10.0.70,Server in mcp-test-rack-dc1-05
+device,mcp-test-srv-036,mcp-test-dc1,mcp-test-rack-dc1-01,server,Dell,PowerEdge R750,2,20,active,SN-TSCBQLJD,10.10.0.71,Server in mcp-test-rack-dc1-01
+device,mcp-test-srv-037,mcp-test-dc2,mcp-test-rack-dc2-01,server,HPE,ProLiant DL380 Gen10,1,8,active,SN-3V1FTRK9,10.20.0.22,Server in mcp-test-rack-dc2-01
+device,mcp-test-srv-038,mcp-test-dc2,mcp-test-rack-dc2-02,server,HPE,ProLiant DL380 Gen10,2,6,active,SN-38RPLDFP,10.20.0.23,Server in mcp-test-rack-dc2-02
+device,mcp-test-srv-039,mcp-test-dc2,mcp-test-rack-dc2-03,server,Dell,PowerEdge R750,2,3,active,SN-YP1BCJD2,10.20.0.24,Server in mcp-test-rack-dc2-03
+device,mcp-test-srv-040,mcp-test-dc2,mcp-test-rack-dc2-01,server,HPE,ProLiant DL380 Gen10,1,9,active,SN-5RBTXSRB,10.20.0.25,Server in mcp-test-rack-dc2-01
+device,mcp-test-srv-041,mcp-test-dc2,mcp-test-rack-dc2-02,server,HPE,ProLiant DL380 Gen10,2,8,active,SN-EK5SAX30,10.20.0.26,Server in mcp-test-rack-dc2-02
+device,mcp-test-srv-042,mcp-test-dc2,mcp-test-rack-dc2-03,server,HPE,ProLiant DL380 Gen10,2,5,active,SN-APH4D8YF,10.20.0.27,Server in mcp-test-rack-dc2-03
+device,mcp-test-srv-043,mcp-test-dc2,mcp-test-rack-dc2-01,server,HPE,ProLiant DL380 Gen10,2,10,active,SN-ZQSSREGW,10.20.0.28,Server in mcp-test-rack-dc2-01
+device,mcp-test-srv-044,mcp-test-dc2,mcp-test-rack-dc2-02,server,Dell,PowerEdge R650,1,10,active,SN-K2Q7T3KL,10.20.0.29,Server in mcp-test-rack-dc2-02
+device,mcp-test-srv-045,mcp-test-dc2,mcp-test-rack-dc2-03,server,Dell,PowerEdge R650,2,7,active,SN-RSM1N759,10.20.0.30,Server in mcp-test-rack-dc2-03
+device,mcp-test-srv-046,mcp-test-dc2,mcp-test-rack-dc2-01,server,HPE,ProLiant DL380 Gen10,1,12,active,SN-P5PLS7N9,10.20.0.31,Server in mcp-test-rack-dc2-01
+device,mcp-test-srv-047,mcp-test-dc2,mcp-test-rack-dc2-02,server,Dell,PowerEdge R750,1,11,active,SN-8E8MD4D6,10.20.0.32,Server in mcp-test-rack-dc2-02
+device,mcp-test-srv-048,mcp-test-dc2,mcp-test-rack-dc2-03,server,HPE,ProLiant DL380 Gen10,1,9,active,SN-E58C2KXP,10.20.0.33,Server in mcp-test-rack-dc2-03
+device,mcp-test-srv-049,mcp-test-dc2,mcp-test-rack-dc2-01,server,Dell,PowerEdge R750,1,13,active,SN-45NL015B,10.20.0.34,Server in mcp-test-rack-dc2-01
+device,mcp-test-srv-050,mcp-test-dc2,mcp-test-rack-dc2-02,server,Dell,PowerEdge R650,1,12,active,SN-X791QDX5,10.20.0.35,Server in mcp-test-rack-dc2-02
+device,mcp-test-srv-051,mcp-test-dc2,mcp-test-rack-dc2-03,server,Dell,PowerEdge R650,2,10,active,SN-Z6B3KNEU,10.20.0.36,Server in mcp-test-rack-dc2-03
+device,mcp-test-srv-052,mcp-test-dc2,mcp-test-rack-dc2-01,server,Dell,PowerEdge R650,1,14,active,SN-FWPZSVHX,10.20.0.37,Server in mcp-test-rack-dc2-01
+device,mcp-test-srv-053,mcp-test-dc2,mcp-test-rack-dc2-02,server,Dell,PowerEdge R750,2,13,active,SN-Y6RKUC89,10.20.0.38,Server in mcp-test-rack-dc2-02
+device,mcp-test-srv-054,mcp-test-dc2,mcp-test-rack-dc2-03,server,HPE,ProLiant DL380 Gen10,2,12,active,SN-8ZRL95DN,10.20.0.39,Server in mcp-test-rack-dc2-03
