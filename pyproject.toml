@@ -1,0 +1,27 @@
+[project]
+name = "netbox-mcp"
+version = "0.1.0"
+description = "MCP server exposing a NetBox installation's REST API for reading and writing data"
+readme = "README.md"
+authors = [
+    { name = "David41186", email = "David.Wright07@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=2.1.1",
+    "pynetbox>=7.8.0",
+    "python-dotenv>=1.2.3",
+]
+
+[project.scripts]
+netbox-mcp = "netbox_mcp:main"
+
+[build-system]
+requires = ["uv_build>=0.12.9,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-mock>=3.15.1",
+]
