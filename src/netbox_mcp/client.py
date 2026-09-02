@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 from functools import lru_cache
+from typing import Any
 
 import pynetbox
 from mcp.server.mcpserver.exceptions import ToolError
-from pynetbox.core.endpoint import Endpoint
+from pynetbox.core.endpoint import DetailEndpoint, Endpoint
+from pynetbox.core.response import Record
 
+from .actions import is_known_action
 from .catalog import is_known_endpoint
 from .config import get_settings
 
@@ -43,3 +46,88 @@ def resolve_endpoint(endpoint: str) -> Endpoint:
 
 def as_dict(record) -> dict:
     return dict(record)
+
+
+def resolve_action(endpoint: str, id: int, action: str) -> DetailEndpoint:
+    """Resolve an "app.endpoint" + numeric id + action name to a pynetbox
+    DetailEndpoint (a "server-side call" beyond plain CRUD, e.g.
+    "available_ips" on a prefix or "trace" on an interface).
+
+    Validates against the actions catalog first, then fetches the specific
+    record. The DetailEndpoint is built directly from the action name
+    (converted to NetBox's hyphenated URL form) rather than via pynetbox's
+    per-model convenience properties (e.g. Prefixes.available_ips): those
+    lag the live NetBox schema — see the note in actions.py — so building
+    it directly here means every catalog entry works the same way whether
+    or not pynetbox happens to model it.
+    """
+    if not is_known_action(endpoint, action):
+        raise NetBoxToolError(
+            f"Unknown action '{action}' for endpoint '{endpoint}'. Call "
+            "netbox_list_actions to see the supported actions."
+        )
+    ep = resolve_endpoint(endpoint)
+    try:
+        record = ep.get(id)
+    except pynetbox.RequestError as exc:
+        raise NetBoxToolError(str(exc)) from exc
+    if record is None:
+        raise NetBoxToolError(f"No object found at '{endpoint}' with id {id}.")
+    return DetailEndpoint(record, action.replace("_", "-"))
+
+
+def as_action_result(result):
+    """Normalize a DetailEndpoint call's return value into something
+    JSON-serializable for the MCP client.
+
+    Since `resolve_action` builds DetailEndpoints generically (no
+    `custom_return`), a "list" call's result comes back as pynetbox's raw
+    generator of dicts (it paginates internally) rather than a list of
+    Records — this materializes that generator. A single Record, a raw
+    dict (e.g. a render-config response), and a raw string (e.g. an SVG
+    rack elevation) are each passed through appropriately.
+    """
+    if isinstance(result, (dict, str)):
+        return result
+    if isinstance(result, Record):
+        return as_dict(result)
+    try:
+        items = list(result)
+    except TypeError:
+        return result
+    return [as_dict(item) if isinstance(item, Record) else item for item in items]
+
+
+def call_detail_endpoint(
+    detail: DetailEndpoint,
+    method: str,
+    params: dict[str, Any] | None = None,
+    data: Any = None,
+):
+    """Execute a DetailEndpoint "list" (GET) or "create" (POST) call and
+    normalize its result.
+
+    This has to own the try/except around consuming `detail.list(...)`,
+    not just calling it: pynetbox's GET path is a lazy generator (see
+    Request.get() in pynetbox.core.query) — `detail.list(**params)`
+    returns instantly without making any HTTP request, and the request
+    (and any exception from it) only happens once the result is iterated.
+    as_action_result() is what iterates it (via `list(result)`), so that
+    call has to stay inside this try, or a real error escapes uncaught as
+    a raw exception instead of a clean NetBoxToolError.
+
+    Also handles pynetbox.ContentError: raised when NetBox returns a
+    successful (2xx) response whose body isn't JSON — e.g. a rack
+    elevation rendered as SVG via params={"render": "svg"}. That's not an
+    error, so its raw text is returned instead of being wrapped as one.
+    """
+    try:
+        if method == "list":
+            result = detail.list(**(params or {}))
+        else:
+            result = detail.create(data=data)
+        return as_action_result(result)
+    except pynetbox.ContentError as exc:
+        return exc.req.text
+    except pynetbox.RequestError as exc:
+        raise NetBoxToolError(str(exc)) from exc
