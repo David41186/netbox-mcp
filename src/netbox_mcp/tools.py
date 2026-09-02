@@ -11,8 +11,8 @@ from .actions import describe_actions
 from .catalog import describe_catalog
 from .client import (
     NetBoxToolError,
-    as_action_result,
     as_dict,
+    call_detail_endpoint,
     get_client,
     resolve_action,
     resolve_endpoint,
@@ -224,11 +224,4 @@ def register_tools(mcp: MCPServer) -> None:
         if method == "create":
             _require_write_access()
         detail = resolve_action(endpoint, id, action)
-        try:
-            if method == "list":
-                result = detail.list(**(params or {}))
-            else:
-                result = detail.create(data=data)
-        except pynetbox.RequestError as exc:
-            raise NetBoxToolError(str(exc)) from exc
-        return as_action_result(result)
+        return call_detail_endpoint(detail, method, params, data)

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from functools import lru_cache
+from typing import Any
 
 import pynetbox
 from mcp.server.mcpserver.exceptions import ToolError
@@ -95,3 +96,38 @@ def as_action_result(result):
     except TypeError:
         return result
     return [as_dict(item) if isinstance(item, Record) else item for item in items]
+
+
+def call_detail_endpoint(
+    detail: DetailEndpoint,
+    method: str,
+    params: dict[str, Any] | None = None,
+    data: Any = None,
+):
+    """Execute a DetailEndpoint "list" (GET) or "create" (POST) call and
+    normalize its result.
+
+    This has to own the try/except around consuming `detail.list(...)`,
+    not just calling it: pynetbox's GET path is a lazy generator (see
+    Request.get() in pynetbox.core.query) — `detail.list(**params)`
+    returns instantly without making any HTTP request, and the request
+    (and any exception from it) only happens once the result is iterated.
+    as_action_result() is what iterates it (via `list(result)`), so that
+    call has to stay inside this try, or a real error escapes uncaught as
+    a raw exception instead of a clean NetBoxToolError.
+
+    Also handles pynetbox.ContentError: raised when NetBox returns a
+    successful (2xx) response whose body isn't JSON — e.g. a rack
+    elevation rendered as SVG via params={"render": "svg"}. That's not an
+    error, so its raw text is returned instead of being wrapped as one.
+    """
+    try:
+        if method == "list":
+            result = detail.list(**(params or {}))
+        else:
+            result = detail.create(data=data)
+        return as_action_result(result)
+    except pynetbox.ContentError as exc:
+        return exc.req.text
+    except pynetbox.RequestError as exc:
+        raise NetBoxToolError(str(exc)) from exc
